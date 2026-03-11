@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button, Form, Input } from 'antd'
+import { useNavigate } from 'react-router-dom';
 import ReCAPTCHA from 'react-google-recaptcha'
 import Swal from 'sweetalert2'
 import './login.css'
@@ -7,6 +8,7 @@ import './login.css'
 const Login = () => {
 
     const SET_KEY = import.meta.env.VITE_SITE_KEY;
+    const navigate = useNavigate();
     const [captcha, setCaptcha] = useState(null)
     const [formChan, setFormChan] = useState(true)
     const [isDisable, setIsDisable] = useState(true)
@@ -28,7 +30,9 @@ const Login = () => {
             "Success",
             "Login successful.",
             "success"
-        )
+        ).then(() => {
+            navigate("/characters");
+        });
     }
 
     const onFinishFailed = () => {
